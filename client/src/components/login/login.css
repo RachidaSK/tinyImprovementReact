@@ -1,0 +1,30 @@
+.naviguation {
+    background: #9370DB;
+}
+
+.navbar-light .navbar-brand  {
+    color: #ffffff;
+    font-size: 40px;
+}
+
+a.brand.navbar-brand {
+    color: #ffffff;
+    font-family: "'Roboto', sans-serif";
+}
+
+div.signUp.jumbotron {
+    padding-top: 2rem;
+}
+
+#login-btn {
+    height: 40px;
+    margin-top: 30px;
+    color: #ffffff;
+    background: #da0ce8;
+    border-color: #da0ce8;
+}
+
+#signup-btn {
+    background: #9370DB;
+    border-color: #9370DB;
+}
