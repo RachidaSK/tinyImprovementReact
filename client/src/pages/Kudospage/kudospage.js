@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Container, Col, Row, Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import * as $ from 'axios';
 
+// const user1 = [{from: "me",
+// to: "you",
+// title: "hello",
+// message: "love"}]
 
 class Kudospage extends Component {
     state={
@@ -30,28 +34,51 @@ class Kudospage extends Component {
         const userId = sessionStorage.getItem("token");
         $.get(`/api/user/${userId}`)
         .then((response) => {
-            console.log(response.data[0].firstName)
+            console.log(response.data[0].kudo)
             console.log(response)
             this.setState({from: response.data[0].firstName});
-           
+            this.renderkudos(response.data[0].kudos);
+        });
 
-        })
     }
 
-   kudosHtml = (array) => {
-       const result = array.map((elem) => (`<Card>
-                                                <CardBody>
-                                                    <h3>${elem.title}</h3>
-                                                    <h6>From: ${elem.from}</h6>
-                                                    <h6>From: ${elem.to}</h6>
-                                                    <p>${elem.message}</p>
-                                                </CardBody>
-                                            </Card>`));
+    kudosHtml = (kudoList) => {
+       const result = kudoList.map((kudo, i) => (`<div key=${i} class="card mt-4 text-center">
+                                                <div class="card-body">
+                                                    <h3>${kudo.title}</h3>
+                                                    <h6>From: ${kudo.from}</h6>
+                                                    <h6>From: ${kudo.to}</h6>
+                                                    <p>${kudo.message}</p>
+                                                </div>
+                                            </div>`))
        return result
    }
 
-    renderkudos = () => {
-        document.getElementById("kudos").innerHTML = this.kudosHtml();
+    renderkudos = (argt) => {
+        document.getElementById("kudos").innerHTML = this.kudosHtml(argt);
+    }
+
+    postKudo = (event) => {
+        event.preventDefault();
+        const userId = sessionStorage.getItem('token');
+
+        const sender = this.state.from;
+        const receiver = this.state.to;
+        const title = this.state.title;
+        const message = this.state.message;
+
+        $.post("/api/kudo", {
+            userId: userId,
+            from: sender,
+            to: receiver,
+            title: title,
+            message: message
+        })
+        .then(function(){
+            
+            this.componentDidMount();
+        })
+
     }
 
 
@@ -61,7 +88,7 @@ class Kudospage extends Component {
                 <Container className="mx-auto">
                     <Row>
                         <Col md="10" >
-                            <h1>Tiny Improvements</h1>
+                            <h1 className="text-center" id="kudoTitle">Tiny Improvements</h1>
                         </Col>
                     </Row>
                     <Row>
