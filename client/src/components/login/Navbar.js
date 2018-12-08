@@ -12,13 +12,13 @@ const Naviguation = (props) => (
                 <Col md={5} >
                     <FormGroup>
                         <Label for="exampleEmail" >Email</Label>
-                        <Input onChange={props.handleChange} type="email" name="email" id="loginEmail" placeholder="Email" />
+                        <Input onChange={props.handleChange} type="email" name="email" id="loginEmail" placeholder="Email" value={props.emailValue}/>
                     </FormGroup>
                 </Col>
                 <Col md={5}>
                     <FormGroup>
                         <Label for="examplePassword">Password</Label>
-                        <Input onChange={props.handleChange} type="password" name="password" id="loginPassword" placeholder="Password" />
+                        <Input onChange={props.handleChange} type="password" name="password" id="loginPassword" placeholder="Password" value={props.pwValue}/>
                     </FormGroup>
                 </Col>
                 <Button onClick={props.handleEvent} color="primary" id="login-btn" >Log In</Button>
