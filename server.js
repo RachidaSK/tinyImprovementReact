@@ -32,6 +32,10 @@ db.once("open", function () {
 require("./routes/api-routes")(app);
 require("./routes/html-routes")(app);
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 app.listen(PORT, function () {
     console.log(`🌎  ==> App is now listening on port : http://localhost:${PORT}`)
 });
