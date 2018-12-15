@@ -37,7 +37,7 @@ class Kudospage extends Component {
             console.log(response.data[0].kudo)
             console.log(response)
             this.setState({from: response.data[0].firstName,
-            kudo: response.data[0].kudo });
+            kudos: response.data[0].kudos});
             this.renderkudos(response.data[0].kudos);
         });
 
@@ -75,10 +75,8 @@ class Kudospage extends Component {
             title: title,
             message: message
         })
-        .then(function(){
-            console.log('posted')
-            this.renderkudos();
-        
+        .then(function(response){
+            console.log('posted', (response))
         })
 
     }
