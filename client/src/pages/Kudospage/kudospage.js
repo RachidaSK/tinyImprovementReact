@@ -37,7 +37,8 @@ class Kudospage extends Component {
         .then((response) => {
             console.log(response.data[0].kudos)
             console.log(response)
-            this.setState({from: response.data[0].firstName});
+            this.setState({from: response.data[0].firstName,
+            kudos: response.data[0].kudos});
             this.renderkudos(response.data[0].kudos);
             // document.getElementById("kudos").innerHTML = <Kudo kudoList={response.data[0].kudos}/>
         });
@@ -76,9 +77,8 @@ class Kudospage extends Component {
             title: title,
             message: message
         })
-        .then(function(){
-            
-            this.componentDidMount();
+        .then(function(response){
+            console.log('posted', (response))
         })
 
     }
@@ -128,7 +128,7 @@ class Kudospage extends Component {
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button color="secondary" onClick={this.toggle}>Close</Button>
-                                    <Button color="primary" onClick={this.renderkudos}>Send</Button>
+                                    <Button color="primary" onClick={this.postKudo}>Send</Button>
                                 </ModalFooter>
                             </Modal>
                         </Col>
