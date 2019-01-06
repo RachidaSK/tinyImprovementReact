@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Container, Col, Row, Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Kudo from '../../components/kudos/kudo'
 import * as $ from 'axios';
 
-// const user1 = [{from: "me",
-// to: "you",
-// title: "hello",
-// message: "love"}]
+const user1 = [{from: "me",
+to: "you",
+title: "hello",
+message: "love"}]
 
 class Kudospage extends Component {
     state={
@@ -13,7 +14,7 @@ class Kudospage extends Component {
         to: "",
         title: "",
         message:"",
-        kudos: [],
+        // kudos: [],
         modal:  false
     }
 
@@ -34,10 +35,11 @@ class Kudospage extends Component {
         const userId = sessionStorage.getItem("token");
         $.get(`/api/user/${userId}`)
         .then((response) => {
-            console.log(response.data[0].kudo)
+            console.log(response.data[0].kudos)
             console.log(response)
             this.setState({from: response.data[0].firstName});
             this.renderkudos(response.data[0].kudos);
+            // document.getElementById("kudos").innerHTML = <Kudo kudoList={response.data[0].kudos}/>
         });
 
     }
